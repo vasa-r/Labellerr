@@ -1,6 +1,10 @@
 import express, { Application } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import connectDb from "./config/connectDb";
+import errorHandler from "./middleware/errorHandler";
+import imageRouter from "./routes/imageRoute";
+import categoryRouter from "./routes/categoryRouter";
 
 dotenv.config();
 
@@ -11,12 +15,10 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "good to go",
-  });
-});
+app.use("/api/image", imageRouter);
+app.use("/api/category", categoryRouter);
+
+app.use(errorHandler);
 
 app.use("*", (req, res) => {
   res.status(404).json({
@@ -26,5 +28,5 @@ app.use("*", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("object");
+  connectDb();
 });
