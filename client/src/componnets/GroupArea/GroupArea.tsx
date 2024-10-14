@@ -20,7 +20,7 @@ const GroupArea = () => {
 
   useEffect(() => {
     getCategories();
-    console.log(filteredData);
+    // console.log(filteredData);
   }, [page, filteredData]);
 
   const getCategories = async () => {
