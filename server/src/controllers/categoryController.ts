@@ -3,8 +3,20 @@ import { statusCode } from "../types/types";
 import Category from "../model/categoryModel";
 
 const getCategory = async (req: Request, res: Response, next: NextFunction) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 20;
+  const skip = (page - 1) * limit;
+
+  const filterCategories = req.query.categories
+    ? (req.query.categories as string).split(",")
+    : [];
   try {
-    const categories = await Category.find().limit(20);
+    const query =
+      filterCategories.length > 0
+        ? { category_name: { $in: filterCategories } }
+        : {};
+
+    const categories = await Category.find(query).skip(skip).limit(limit);
     if (!categories) {
       res.status(statusCode.OK).json({
         success: false,
