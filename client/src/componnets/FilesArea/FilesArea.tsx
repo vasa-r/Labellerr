@@ -15,11 +15,10 @@ const FilesArea = () => {
   const scrollableAreaRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // Resetting images and pagination when filteredData changes
     setImages([]);
     setPage(1);
     setHasMore(true);
-    getUrl(); // Fetch the new data immediately when filters change
+    getUrl();
   }, [filteredData]);
 
   useEffect(() => {
@@ -35,6 +34,7 @@ const FilesArea = () => {
         filteredData.length > 0 ? filteredData : []
       );
       const { data } = response.data;
+      // console.log(data);
 
       if (data.length > 0) {
         setImages((prev) => [...prev, ...data]);
@@ -51,7 +51,6 @@ const FilesArea = () => {
   const handleScroll = () => {
     const target = scrollableAreaRef.current;
     if (target) {
-      // Check if we need to load more images
       if (
         target.scrollHeight - target.scrollTop <= target.clientHeight + 50 &&
         hasMore &&
@@ -81,31 +80,30 @@ const FilesArea = () => {
     setShowModal(true);
   };
 
-  if (showModal) {
-    return (
-      <ImageModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        id={imageId}
-      />
-    );
-  }
-
   return (
-    <div
-      ref={scrollableAreaRef}
-      className="grid items-start h-full grid-cols-10 gap-2 overflow-y-scroll justify-items-start scroll-smooth"
-    >
-      {images.map(({ coco_url, id }, index) => (
-        <img
-          key={index}
-          src={coco_url}
-          alt="thumb image"
-          className="w-full h-[170px] cursor-pointer"
-          onClick={() => handleImageClick(id)}
+    <>
+      {showModal && (
+        <ImageModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          id={imageId}
         />
-      ))}
-    </div>
+      )}
+      <div
+        ref={scrollableAreaRef}
+        className="grid items-start h-full grid-cols-10 gap-2 overflow-y-scroll justify-items-start scroll-smooth"
+      >
+        {images.map(({ coco_url, id }, index) => (
+          <img
+            key={index}
+            src={coco_url}
+            alt="thumb image"
+            className="w-full h-[170px] cursor-pointer"
+            onClick={() => handleImageClick(id)}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 
