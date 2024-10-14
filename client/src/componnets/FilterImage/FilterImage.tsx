@@ -48,10 +48,14 @@ const FilterImage = () => {
     };
   }, []);
 
+  const handleClearFilters = () => {
+    setFilteredData([]);
+  };
+
   return (
     <div className="relative w-full">
       {filteredData.length > 0 && (
-        <div className="flex flex-wrap p-2 rounded-[4px] border border-gray-500 mb-4">
+        <div className="flex flex-wrap p-2 pb-20 relative rounded-[4px] border border-gray-500 mb-4">
           {filteredData.map((item) => (
             <TextChips
               key={item}
@@ -59,6 +63,12 @@ const FilterImage = () => {
               onRemove={() => removeFilter(item)}
             />
           ))}
+          <button
+            className="absolute text-black bottom-2 right-2 btn btn-primary"
+            onClick={handleClearFilters}
+          >
+            Clear
+          </button>
         </div>
       )}
 

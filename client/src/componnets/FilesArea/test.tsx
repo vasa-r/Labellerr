@@ -3,8 +3,6 @@ import { getImagesUrl } from "../../api/images";
 import { useApp } from "../../context/AppContext";
 import { imagesUrl } from "../../types/types";
 import ImageModal from "../ImageModal/ImageModal";
-import PageLoader from "../LoadingComponents/PageLoader";
-import ShimmerLoader from "../LoadingComponents/ShimmerLoader";
 
 const FilesArea = () => {
   const { filteredData } = useApp();
@@ -14,27 +12,22 @@ const FilesArea = () => {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [imageId, setImageId] = useState(0);
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const scrollableAreaRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setImages([]);
     setPage(1);
     setHasMore(true);
-    getUrl(1);
+    getUrl();
   }, [filteredData]);
 
   useEffect(() => {
-    if (page > 1) {
-      getUrl(page);
-    }
+    getUrl();
   }, [page]);
 
-  const getUrl = async (page: number) => {
+  const getUrl = async () => {
     if (loading || !hasMore) return;
-    if (!isFirstLoad) {
-      setLoading(true);
-    }
+    setLoading(true);
     try {
       const response = await getImagesUrl(
         page,
@@ -42,6 +35,7 @@ const FilesArea = () => {
       );
       const { data } = response.data;
       // console.log(data);
+
       if (data.length > 0) {
         setImages((prev) => [...prev, ...data]);
       } else {
@@ -51,17 +45,29 @@ const FilesArea = () => {
       console.log("Error fetching images:", error);
     } finally {
       setLoading(false);
-      setIsFirstLoad(false);
     }
   };
+
+  // const handleScroll = () => {
+  //   const target = scrollableAreaRef.current;
+  //   if (target) {
+  //     if (
+  //       target.scrollHeight - target.scrollTop <= target.clientHeight + 50 &&
+  //       hasMore &&
+  // !loading
+  //     ) {
+  //       setPage((prev) => prev + 1);
+  //     }
+  //   }
+  // };
 
   const handleScroll = () => {
     const target = scrollableAreaRef.current;
     if (target) {
       const isAtBottom =
-        target.scrollHeight - target.scrollTop <= target.clientHeight + 50;
+        target.scrollHeight - target.scrollTop <= target.clientHeight + 50; // Check if scrolled near the bottom
       if (isAtBottom && hasMore && !loading) {
-        setPage((prev) => prev + 1);
+        setPage((prev) => prev + 1); // Increment page to load more images
       }
     }
   };
@@ -87,7 +93,6 @@ const FilesArea = () => {
 
   return (
     <>
-      {isFirstLoad && <PageLoader />}
       {showModal && (
         <ImageModal
           showModal={showModal}
@@ -98,7 +103,6 @@ const FilesArea = () => {
       <div
         ref={scrollableAreaRef}
         className="grid items-start h-full grid-cols-10 gap-2 overflow-y-scroll justify-items-start scroll-smooth"
-        style={{ maxHeight: "95%" }}
       >
         {images.map(({ coco_url, id }, index) => (
           <img
@@ -109,10 +113,6 @@ const FilesArea = () => {
             onClick={() => handleImageClick(id)}
           />
         ))}
-        {loading &&
-          Array.from({ length: 30 }).map((_, index) => (
-            <ShimmerLoader key={index} />
-          ))}
       </div>
     </>
   );
