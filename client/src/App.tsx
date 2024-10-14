@@ -5,7 +5,7 @@ import ExplorePage from "./pages/ExplorePage";
 
 const App = () => {
   return (
-    <div>
+    <div className="w-screen h-screen">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/explore" element={<ExplorePage />} />

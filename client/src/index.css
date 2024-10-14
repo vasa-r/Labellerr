@@ -36,3 +36,13 @@ body::before {
 .center {
   @apply flex items-center justify-center;
 }
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  @apply w-full px-2 py-2 bg-transparent border-2 rounded-lg outline-none border-black/20;
+}
+
+label {
+  @apply block my-1 text-sm text-black/70;
+}

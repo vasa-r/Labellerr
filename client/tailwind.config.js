@@ -6,6 +6,10 @@ export default {
       fontFamily: {
         outfit: ["Outfit", "sans-serif"],
       },
+      colors: {
+        customGray: "#1F1F23",
+        mediumGray: "#4A4A4D",
+      },
     },
   },
   plugins: [],
