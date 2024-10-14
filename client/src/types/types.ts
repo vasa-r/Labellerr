@@ -30,3 +30,31 @@ export interface FolderProps {
   name: string;
   count: number;
 }
+
+export interface imagesUrl {
+  _id: string;
+  coco_url: string;
+  id: number;
+}
+
+export interface ImageModalProps {
+  showModal: boolean;
+  setShowModal: (arg: boolean) => void;
+  id: number;
+}
+
+export interface ImageType {
+  _id: string;
+  file_name: string;
+  coco_url: string;
+  height: number;
+  width: number;
+  date_captured: string;
+  flickr_url: string;
+  id: number;
+  categories: string[];
+}
+
+export interface ImageDetailType {
+  image: ImageType;
+}
