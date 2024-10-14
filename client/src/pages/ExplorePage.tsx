@@ -1,8 +1,22 @@
 import SideBar from "../componnets/SideBar/SideBar";
+import FilesArea from "../componnets/FilesArea/FilesArea";
+import GroupArea from "../componnets/GroupArea/GroupArea";
 import { useApp } from "../context/AppContext";
 
 const ExplorePage = () => {
-  const { theme } = useApp();
+  const { theme, displayMode } = useApp();
+
+  const renderDisplayMode = () => {
+    switch (displayMode) {
+      case "file":
+        return <FilesArea />;
+      case "group":
+        return <GroupArea />;
+      default:
+        return <div>Select a display mode</div>;
+    }
+  };
+
   return (
     <div className="w-full h-full bg-[#18181b] gap-4 p-6 center">
       <div
@@ -12,7 +26,7 @@ const ExplorePage = () => {
             : "bg-gradient-to-b from-customGray to-mediumGray"
         } `}
       >
-        1
+        {renderDisplayMode()}
       </div>
       <div
         className={`flex flex-col items-center w-full h-full gap-4 p-5 rounded-lg basis-1/4 ${

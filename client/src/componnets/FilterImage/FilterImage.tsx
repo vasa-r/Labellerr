@@ -4,8 +4,8 @@ import { filterData } from "../../utils/constants";
 import TextChips from "../TextChips/TextChips";
 
 const FilterImage = () => {
-  const [filteredData, setFilteredData] = useState<string[]>([]);
-  const { theme } = useApp();
+  // const [filteredData, setFilteredData] = useState<string[]>([]);
+  const { theme, filteredData, setFilteredData } = useApp();
   const [showFilters, setShowFilters] = useState(false);
   const [filterInput, setFilterInput] = useState("");
 

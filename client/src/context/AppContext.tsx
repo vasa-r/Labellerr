@@ -16,6 +16,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
   const initialDisplayMode = window.localStorage.getItem("dMode") || "file";
   const [theme, setTheme] = useState(initialTheme);
   const [displayMode, setDisplayMode] = useState(initialDisplayMode);
+  const [filteredData, setFilteredData] = useState<string[]>([]);
 
   const setAppTheme = (theme: string) => {
     setTheme(theme);
@@ -34,6 +35,8 @@ const AppProvider = ({ children }: AppProviderProps) => {
     displayMode,
     setDisplayMode,
     setAppDisplayMode,
+    filteredData,
+    setFilteredData,
   };
 
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
