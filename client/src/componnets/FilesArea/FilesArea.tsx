@@ -43,7 +43,7 @@ const FilesArea = () => {
         category
       );
       const { data } = response.data;
-      console.log(data);
+      // console.log(data);
       if (data?.length > 0) {
         setImages((prev) => [...prev, ...data]);
       } else {
