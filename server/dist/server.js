@@ -15,6 +15,9 @@ const PORT = process.env.PORT || 3000;
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
+app.get("/ping", (req, res) => {
+    res.send("API is awake!");
+});
 app.use("/api/image", imageRoute_1.default);
 app.use("/api/category", categoryRouter_1.default);
 app.use(errorHandler_1.default);

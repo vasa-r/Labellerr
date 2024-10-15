@@ -15,6 +15,10 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
+app.get("/ping", (req, res) => {
+  res.send("API is awake!");
+});
+
 app.use("/api/image", imageRouter);
 app.use("/api/category", categoryRouter);
 
