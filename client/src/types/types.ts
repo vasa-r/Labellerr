@@ -9,6 +9,8 @@ export interface AppContextType {
   setAppDisplayMode: (mode: string) => void;
   filteredData: string[];
   setFilteredData: React.Dispatch<React.SetStateAction<string[]>>;
+  category: string | null;
+  setCategory: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 export interface AppProviderProps {

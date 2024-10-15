@@ -4,7 +4,7 @@ import GroupArea from "../componnets/GroupArea/GroupArea";
 import { useApp } from "../context/AppContext";
 
 const ExplorePage = () => {
-  const { theme, displayMode } = useApp();
+  const { theme, displayMode, category } = useApp();
 
   const renderDisplayMode = () => {
     switch (displayMode) {
@@ -26,7 +26,8 @@ const ExplorePage = () => {
             : "bg-gradient-to-b from-customGray to-mediumGray"
         } `}
       >
-        {renderDisplayMode()}
+        {category && <FilesArea />}
+        {!category && renderDisplayMode()}
       </div>
       <div
         className={`flex flex-col items-center w-full h-full gap-4 p-5 rounded-lg basis-1/4 ${

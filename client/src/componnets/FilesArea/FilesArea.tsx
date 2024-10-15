@@ -5,9 +5,10 @@ import { imagesUrl } from "../../types/types";
 import ImageModal from "../ImageModal/ImageModal";
 import PageLoader from "../LoadingComponents/PageLoader";
 import ShimmerLoader from "../LoadingComponents/ShimmerLoader";
+import Back from "../../assets/left-arrow.svg";
 
 const FilesArea = () => {
-  const { filteredData } = useApp();
+  const { filteredData, category, setCategory } = useApp();
   const [images, setImages] = useState<imagesUrl[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -38,7 +39,8 @@ const FilesArea = () => {
     try {
       const response = await getImagesUrl(
         page,
-        filteredData.length > 0 ? filteredData : []
+        filteredData.length > 0 ? filteredData : [],
+        category
       );
       const { data } = response.data;
       // console.log(data);
@@ -85,6 +87,10 @@ const FilesArea = () => {
     setShowModal(true);
   };
 
+  const handleBack = () => {
+    setCategory(null);
+  };
+
   return (
     <>
       {isFirstLoad && <PageLoader />}
@@ -94,6 +100,16 @@ const FilesArea = () => {
           setShowModal={setShowModal}
           id={imageId}
         />
+      )}
+      {category && (
+        <div className="relative w-full h-8 bg-transparent">
+          <img
+            src={Back}
+            alt="back"
+            className="absolute top-0 left-0 w-6 cursor-pointer"
+            onClick={handleBack}
+          />
+        </div>
       )}
       <div
         ref={scrollableAreaRef}
@@ -107,6 +123,7 @@ const FilesArea = () => {
             alt="thumb image"
             className="w-full h-[170px] cursor-pointer"
             onClick={() => handleImageClick(id)}
+            title="Go back to group view"
           />
         ))}
         {loading &&

@@ -1,14 +1,16 @@
 import { useApp } from "../../context/AppContext";
 
 const ToggleView = () => {
-  const { theme, displayMode, setAppDisplayMode } = useApp();
+  const { theme, displayMode, setAppDisplayMode, setCategory } = useApp();
 
   const handleFileView = () => {
     setAppDisplayMode("file");
+    setCategory(null);
   };
 
   const handleGroupView = () => {
     setAppDisplayMode("group");
+    setCategory(null);
   };
   return (
     <div

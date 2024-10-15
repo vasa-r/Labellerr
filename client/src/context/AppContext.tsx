@@ -13,10 +13,11 @@ export const useApp = () => {
 
 const AppProvider = ({ children }: AppProviderProps) => {
   const initialTheme = window.localStorage.getItem("theme") || "light";
-  const initialDisplayMode = window.localStorage.getItem("dMode") || "file";
+  // const initialDisplayMode = window.localStorage.getItem("dMode") || "file";
   const [theme, setTheme] = useState(initialTheme);
-  const [displayMode, setDisplayMode] = useState(initialDisplayMode);
+  const [displayMode, setDisplayMode] = useState("file");
   const [filteredData, setFilteredData] = useState<string[]>([]);
+  const [category, setCategory] = useState<string | null>(null);
 
   const setAppTheme = (theme: string) => {
     setTheme(theme);
@@ -25,7 +26,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
 
   const setAppDisplayMode = (mode: string) => {
     setDisplayMode(mode);
-    localStorage.setItem("dMode", mode);
+    // localStorage.setItem("dMode", mode);
   };
 
   const values = {
@@ -37,6 +38,8 @@ const AppProvider = ({ children }: AppProviderProps) => {
     setAppDisplayMode,
     filteredData,
     setFilteredData,
+    category,
+    setCategory,
   };
 
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

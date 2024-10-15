@@ -22,10 +22,14 @@ const getSingleImage = async (id: number) => {
   }
 };
 
-const getImagesUrl = async (page: number, filteredData: string[]) => {
+const getImagesUrl = async (
+  page: number,
+  filteredData: string[],
+  category: string | null
+) => {
   try {
     const response = await axios.get(`${BACKEND_ORIGIN_URL}/image`, {
-      params: { page, categories: filteredData.join(",") },
+      params: { page, categories: filteredData.join(","), category },
     });
 
     return {
