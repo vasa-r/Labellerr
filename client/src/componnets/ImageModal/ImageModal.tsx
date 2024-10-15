@@ -72,7 +72,7 @@ const ImageModal = ({ showModal, setShowModal, id }: ImageModalProps) => {
           onClick={() => setShowModal(false)}
         />
         <img
-          src={image.coco_url}
+          src={image.flickr_url}
           alt={image.file_name}
           className="object-cover w-full h-full"
         />

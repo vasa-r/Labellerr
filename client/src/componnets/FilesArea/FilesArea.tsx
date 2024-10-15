@@ -43,7 +43,7 @@ const FilesArea = () => {
         category
       );
       const { data } = response.data;
-      // console.log(data);
+      console.log(data);
       if (data?.length > 0) {
         setImages((prev) => [...prev, ...data]);
       } else {
@@ -116,10 +116,10 @@ const FilesArea = () => {
         className="grid items-start h-full grid-cols-10 gap-2 overflow-y-scroll justify-items-start scroll-smooth"
         style={{ maxHeight: "95%" }}
       >
-        {images.map(({ coco_url, id }, index) => (
+        {images.map(({ flickr_url, id }, index) => (
           <img
             key={index}
-            src={coco_url}
+            src={flickr_url}
             alt="thumb image"
             className="w-full h-[170px] cursor-pointer"
             onClick={() => handleImageClick(id)}

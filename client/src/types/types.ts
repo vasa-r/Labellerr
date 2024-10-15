@@ -35,7 +35,7 @@ export interface FolderProps {
 
 export interface imagesUrl {
   _id: string;
-  coco_url: string;
+  flickr_url: string;
   id: number;
 }
 
