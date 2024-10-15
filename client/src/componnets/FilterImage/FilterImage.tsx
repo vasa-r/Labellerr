@@ -54,7 +54,7 @@ const FilterImage = () => {
 
   return (
     <div className="relative w-full">
-      {filteredData.length > 0 && (
+      {filteredData?.length > 0 && (
         <div className="flex flex-wrap p-2 pb-20 relative rounded-[4px] border border-gray-500 mb-4">
           {filteredData.map((item) => (
             <TextChips
@@ -93,7 +93,7 @@ const FilterImage = () => {
         />
       </div>
 
-      {showFilters && filteredOptions.length > 0 && (
+      {showFilters && filteredOptions?.length > 0 && (
         <div
           ref={dropdownRef}
           className="flex flex-col p-2 mt-4 border border-gray-500 rounded-md"

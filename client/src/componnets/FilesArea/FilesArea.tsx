@@ -39,12 +39,12 @@ const FilesArea = () => {
     try {
       const response = await getImagesUrl(
         page,
-        filteredData.length > 0 ? filteredData : [],
+        filteredData?.length > 0 ? filteredData : [],
         category
       );
       const { data } = response.data;
       // console.log(data);
-      if (data.length > 0) {
+      if (data?.length > 0) {
         setImages((prev) => [...prev, ...data]);
       } else {
         setHasMore(false);

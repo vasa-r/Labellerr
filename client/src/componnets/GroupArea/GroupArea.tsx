@@ -34,11 +34,11 @@ const GroupArea = () => {
     try {
       const response = await getAllCategories(
         page,
-        filteredData.length > 0 ? filteredData : []
+        filteredData?.length > 0 ? filteredData : []
       );
       const { data } = response.data;
 
-      if (data.length > 0) {
+      if (data?.length > 0) {
         setCategories((prev) => [...prev, ...data]);
       } else {
         setHasMore(false);

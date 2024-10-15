@@ -18,7 +18,7 @@ const getImages = async (req: Request, res: Response, next: NextFunction) => {
 
     if (category) {
       query = { categories: category };
-    } else if (filterCategories.length > 0) {
+    } else if (filterCategories?.length > 0) {
       query = { categories: { $in: filterCategories } };
     }
 

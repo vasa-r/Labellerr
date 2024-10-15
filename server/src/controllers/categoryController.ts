@@ -12,7 +12,7 @@ const getCategory = async (req: Request, res: Response, next: NextFunction) => {
     : [];
   try {
     const query =
-      filterCategories.length > 0
+      filterCategories?.length > 0
         ? { category_name: { $in: filterCategories } }
         : {};
 
