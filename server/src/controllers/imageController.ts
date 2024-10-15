@@ -23,7 +23,7 @@ const getImages = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     const images = await Image.find(query, {
-      coco_url: 1,
+      flickr_url: 1,
       id: 1,
     })
       .skip(skip)
@@ -39,7 +39,7 @@ const getImages = async (req: Request, res: Response, next: NextFunction) => {
 
     const updatedImages = images.map((image) => ({
       ...image.toObject(),
-      coco_url: image.coco_url.replace(/^http:\/\//i, "https://"), // Replace HTTP with HTTPS
+      flickr_url: image.flickr_url.replace(/^http:\/\//i, "https://"), // Replace HTTP with HTTPS
     }));
     // console.log(updatedImages);
     // console.log(images);
@@ -70,7 +70,7 @@ const getImage = async (req: Request, res: Response, next: NextFunction) => {
 
     const updatedImage = image.map((item) => ({
       ...item.toObject(),
-      coco_url: item.coco_url.replace(/^http:\/\//i, "https://"), // Replace HTTP with HTTPS
+      flickr_url: item.flickr_url.replace(/^http:\/\//i, "https://"), // Replace HTTP with HTTPS
     }));
     // console.log(updatedImage);
     res.status(statusCode.OK).json({

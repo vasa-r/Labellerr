@@ -28,11 +28,11 @@ const getImages = (req, res, next) => __awaiter(void 0, void 0, void 0, function
         if (category) {
             query = { categories: category };
         }
-        else if (filterCategories.length > 0) {
+        else if ((filterCategories === null || filterCategories === void 0 ? void 0 : filterCategories.length) > 0) {
             query = { categories: { $in: filterCategories } };
         }
         const images = yield imageModel_1.default.find(query, {
-            coco_url: 1,
+            flickr_url: 1,
             id: 1,
         })
             .skip(skip)
@@ -45,7 +45,7 @@ const getImages = (req, res, next) => __awaiter(void 0, void 0, void 0, function
             });
             return;
         }
-        const updatedImages = images.map((image) => (Object.assign(Object.assign({}, image.toObject()), { coco_url: image.coco_url.replace(/^http:\/\//i, "https://") })));
+        const updatedImages = images.map((image) => (Object.assign(Object.assign({}, image.toObject()), { flickr_url: image.flickr_url.replace(/^http:\/\//i, "https://") })));
         // console.log(updatedImages);
         // console.log(images);
         res.status(types_1.statusCode.OK).json({
@@ -72,7 +72,7 @@ const getImage = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
             });
             return;
         }
-        const updatedImage = image.map((item) => (Object.assign(Object.assign({}, item.toObject()), { coco_url: item.coco_url.replace(/^http:\/\//i, "https://") })));
+        const updatedImage = image.map((item) => (Object.assign(Object.assign({}, item.toObject()), { flickr_url: item.flickr_url.replace(/^http:\/\//i, "https://") })));
         // console.log(updatedImage);
         res.status(types_1.statusCode.OK).json({
             success: true,

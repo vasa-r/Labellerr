@@ -23,7 +23,7 @@ const getCategory = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         ? req.query.categories.split(",")
         : [];
     try {
-        const query = filterCategories.length > 0
+        const query = (filterCategories === null || filterCategories === void 0 ? void 0 : filterCategories.length) > 0
             ? { category_name: { $in: filterCategories } }
             : {};
         const categories = yield categoryModel_1.default.find(query).skip(skip).limit(limit);
