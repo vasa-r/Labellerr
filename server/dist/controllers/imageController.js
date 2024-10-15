@@ -72,10 +72,12 @@ const getImage = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
             });
             return;
         }
+        const updatedImage = image.map((item) => (Object.assign(Object.assign({}, item.toObject()), { coco_url: item.coco_url.replace(/^http:\/\//i, "https://") })));
+        // console.log(updatedImage);
         res.status(types_1.statusCode.OK).json({
             success: true,
             message: "Images fetched",
-            data: image,
+            data: updatedImage,
         });
     }
     catch (error) {

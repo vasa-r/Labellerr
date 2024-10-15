@@ -67,10 +67,16 @@ const getImage = async (req: Request, res: Response, next: NextFunction) => {
       });
       return;
     }
+
+    const updatedImage = image.map((item) => ({
+      ...item.toObject(),
+      coco_url: item.coco_url.replace(/^http:\/\//i, "https://"), // Replace HTTP with HTTPS
+    }));
+    // console.log(updatedImage);
     res.status(statusCode.OK).json({
       success: true,
       message: "Images fetched",
-      data: image,
+      data: updatedImage,
     });
   } catch (error) {
     console.log(error);
